@@ -2,7 +2,11 @@
 # Name your project! Project names should contain only lowercase characters
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
+<<<<<<< HEAD
 name: 'curso'
+=======
+name: 'my_new_project'
+>>>>>>> 76b96e4d81a73375d9dfcc657480fd5fcd7320c9
 version: '1.0.0'
 config-version: 2
 
@@ -36,6 +40,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 
 models:
+<<<<<<< HEAD
   +transient: false
   curso:
     # Applies to all files under models/example/
@@ -62,3 +67,9 @@ snapshots:
   +transient: false
   +target_database: "{{ env_var('DBT_ENVIRONMENTS') }}_SILVER_DB"
   +target_schema: snapshots
+=======
+  my_new_project:
+    # Applies to all files under models/example/
+    example:
+      +materialized: table
+>>>>>>> 76b96e4d81a73375d9dfcc657480fd5fcd7320c9

@@ -1,4 +1,4 @@
-WITH src_players AS (
+WITH src_players_hasta_2019 AS (
     SELECT * 
     FROM {{ source('nba_games_data', 'players') }}
     ),
