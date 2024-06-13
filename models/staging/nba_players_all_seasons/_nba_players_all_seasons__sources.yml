@@ -1,0 +1,77 @@
+version: 2
+
+sources:
+  - name: nba_players_all_seasons
+    description: "datos de jugadores con medidas desde 1996"
+    database: alumno27_dev_bronze_db
+    schema: nba_players_all_season
+    tables:
+      - name: players
+        description: ""
+        columns:
+          - name: id_player
+            data_type: number
+            description: ""
+          - name: player_name
+            data_type: varchar
+            description: ""
+          - name: team_abbreviation
+            data_type: varchar
+            description: ""
+          - name: age
+            data_type: number
+            description: ""
+          - name: player_height
+            data_type: number
+            description: ""
+          - name: player_weight
+            data_type: number
+            description: ""
+          - name: college
+            data_type: varchar
+            description: ""
+          - name: country
+            data_type: varchar
+            description: ""
+          - name: draft_year
+            data_type: varchar
+            description: ""
+          - name: draft_round
+            data_type: varchar
+            description: ""
+          - name: draft_number
+            data_type: varchar
+            description: ""
+          - name: gp
+            data_type: number
+            description: ""
+          - name: pts
+            data_type: number
+            description: ""
+          - name: reb
+            data_type: number
+            description: ""
+          - name: ast
+            data_type: number
+            description: ""
+          - name: net_rating
+            data_type: number
+            description: ""
+          - name: oreb_pct
+            data_type: number
+            description: ""
+          - name: dreb_pct
+            data_type: number
+            description: ""
+          - name: usg_pct
+            data_type: number
+            description: ""
+          - name: ts_pct
+            data_type: number
+            description: ""
+          - name: ast_pct
+            data_type: number
+            description: ""
+          - name: season
+            data_type: varchar
+            description: ""

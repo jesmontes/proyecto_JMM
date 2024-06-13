@@ -1,0 +1,270 @@
+version: 2
+
+sources:
+  - name: nba_games_data
+    description: "datos sobre la NBA desde 2003, jugadores,partidos.."
+    database: alumno27_dev_bronze_db
+    schema: nba_games_data
+    tables:
+      - name: games
+        description: ""
+        columns:
+          - name: game_date_est
+            data_type: date
+            description: ""
+          - name: game_id
+            data_type: number
+            description: ""
+          - name: game_status_text
+            data_type: varchar
+            description: ""
+          - name: home_team_id
+            data_type: number
+            description: ""
+          - name: visitor_team_id
+            data_type: number
+            description: ""
+          - name: season
+            data_type: number
+            description: ""
+          - name: team_id_home
+            data_type: number
+            description: ""
+          - name: pts_home
+            data_type: number
+            description: ""
+          - name: fg_pct_home
+            data_type: number
+            description: ""
+          - name: ft_pct_home
+            data_type: number
+            description: ""
+          - name: fg3_pct_home
+            data_type: number
+            description: ""
+          - name: ast_home
+            data_type: number
+            description: ""
+          - name: reb_home
+            data_type: number
+            description: ""
+          - name: team_id_away
+            data_type: number
+            description: ""
+          - name: pts_away
+            data_type: number
+            description: ""
+          - name: fg_pct_away
+            data_type: number
+            description: ""
+          - name: ft_pct_away
+            data_type: number
+            description: ""
+          - name: fg3_pct_away
+            data_type: number
+            description: ""
+          - name: ast_away
+            data_type: number
+            description: ""
+          - name: reb_away
+            data_type: number
+            description: ""
+          - name: home_team_wins
+            data_type: number
+            description: ""
+
+      - name: game_details
+        description: ""
+        columns:
+          - name: game_id
+            data_type: number
+            description: ""
+          - name: team_id
+            data_type: number
+            description: ""
+          - name: team_abbreviation
+            data_type: varchar
+            description: ""
+          - name: team_city
+            data_type: varchar
+            description: ""
+          - name: player_id
+            data_type: number
+            description: ""
+          - name: player_name
+            data_type: varchar
+            description: ""
+          - name: nickname
+            data_type: varchar
+            description: ""
+          - name: start_position
+            data_type: varchar
+            description: ""
+          - name: comment
+            data_type: varchar
+            description: ""
+          - name: min
+            data_type: varchar
+            description: ""
+          - name: fgm
+            data_type: number
+            description: ""
+          - name: fga
+            data_type: number
+            description: ""
+          - name: fg_pct
+            data_type: number
+            description: ""
+          - name: fg3m
+            data_type: number
+            description: ""
+          - name: fg3a
+            data_type: number
+            description: ""
+          - name: fg3_pct
+            data_type: number
+            description: ""
+          - name: ftm
+            data_type: number
+            description: ""
+          - name: fta
+            data_type: number
+            description: ""
+          - name: ft_pct
+            data_type: number
+            description: ""
+          - name: oreb
+            data_type: number
+            description: ""
+          - name: dreb
+            data_type: number
+            description: ""
+          - name: reb
+            data_type: number
+            description: ""
+          - name: ast
+            data_type: number
+            description: ""
+          - name: stl
+            data_type: number
+            description: ""
+          - name: blk
+            data_type: number
+            description: ""
+          - name: to
+            data_type: number
+            description: ""
+          - name: pf
+            data_type: number
+            description: ""
+          - name: pts
+            data_type: number
+            description: ""
+          - name: plus_minus
+            data_type: number
+            description: ""
+
+      - name: players
+        description: ""
+        columns:
+          - name: player_name
+            data_type: varchar
+            description: ""
+          - name: team_id
+            data_type: number
+            description: ""
+          - name: player_id
+            data_type: number
+            description: ""
+          - name: season
+            data_type: number
+            description: ""
+
+      - name: ranking
+        description: ""
+        columns:
+          - name: team_id
+            data_type: number
+            description: ""
+          - name: league_id
+            data_type: number
+            description: ""
+          - name: season_id
+            data_type: number
+            description: ""
+          - name: standingsdate
+            data_type: date
+            description: ""
+          - name: conference
+            data_type: varchar
+            description: ""
+          - name: team
+            data_type: varchar
+            description: ""
+          - name: g
+            data_type: number
+            description: ""
+          - name: w
+            data_type: number
+            description: ""
+          - name: l
+            data_type: number
+            description: ""
+          - name: w_pct
+            data_type: number
+            description: ""
+          - name: home_record
+            data_type: varchar
+            description: ""
+          - name: road_record
+            data_type: varchar
+            description: ""
+          - name: returntoplay
+            data_type: varchar
+            description: ""
+
+      - name: teams
+        description: ""
+        columns:
+          - name: league_id
+            data_type: number
+            description: ""
+          - name: team_id
+            data_type: number
+            description: ""
+          - name: min_year
+            data_type: number
+            description: ""
+          - name: max_year
+            data_type: number
+            description: ""
+          - name: abbreviation
+            data_type: varchar
+            description: ""
+          - name: nickname
+            data_type: varchar
+            description: ""
+          - name: yearfounded
+            data_type: number
+            description: ""
+          - name: city
+            data_type: varchar
+            description: ""
+          - name: arena
+            data_type: varchar
+            description: ""
+          - name: arenacapacity
+            data_type: number
+            description: ""
+          - name: owner
+            data_type: varchar
+            description: ""
+          - name: generalmanager
+            data_type: varchar
+            description: ""
+          - name: headcoach
+            data_type: varchar
+            description: ""
+          - name: dleagueaffiliation
+            data_type: varchar
+            description: ""

@@ -1,0 +1,13 @@
+version: 2
+
+models:
+    - name: base_nba_games_data__players
+      description: "Base de jugadores de nba_games_data"
+      columns:
+          - name: player_id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+
+    
