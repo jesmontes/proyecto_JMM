@@ -2,7 +2,7 @@ with
 
 source as (
 
-    select * from {{ source('nba_players_all_seasons', 'players') }}
+    select * from {{ source('__nba_players_all_seasons', 'players') }}
 
 ),
 

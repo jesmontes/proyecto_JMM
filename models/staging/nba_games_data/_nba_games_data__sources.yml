@@ -1,10 +1,10 @@
 version: 2
 
 sources:
-  - name: nba_games_data
+  - name: __nba_games_data
     description: "datos sobre la NBA desde 2003, jugadores,partidos.."
     database: alumno27_dev_bronze_db
-    schema: nba_games_data
+    schema: __nba_games_data
     tables:
       - name: games
         description: ""

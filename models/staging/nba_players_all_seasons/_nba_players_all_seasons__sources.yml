@@ -1,10 +1,10 @@
 version: 2
 
 sources:
-  - name: nba_players_all_seasons
+  - name: __nba_players_all_seasons
     description: "datos de jugadores con medidas desde 1996"
     database: alumno27_dev_bronze_db
-    schema: nba_players_all_season
+    schema: __nba_players_all_season
     tables:
       - name: players
         description: ""
