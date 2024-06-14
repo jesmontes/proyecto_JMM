@@ -1,4 +1,4 @@
---Saco jugadores despues de 2019 de game_details y los uno a players que solo llega a 2019
+--Saco jugadores despues de 2019 de game_details y los uno a players que solo llega a 2019 para tener jugadores totales
 WITH src_players_hasta_2019 AS (
         SELECT 
             player_id           
@@ -47,11 +47,12 @@ SELECT
             ,player_name
             ,team_id
             --añado año que acaba para poder luego combinar con la otra
-            ,CONCAT(season, '-', ROUND(CAST(SUBSTRING(season, 3, 2) + 1 AS VARCHAR), 0)) AS season 
+            ,{{concat_season('season')}}
             ,_fivetran_synced 
                         
      FROM union_players
 )
 
-SELECT * FROM player_season_corregida order by season desc
+SELECT * FROM player_season_corregida 
+
 
