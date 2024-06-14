@@ -30,7 +30,7 @@ renamed as (
         ,{{round_and_alias('fg3_pct_home',2)}} 
         --,ft_pct_home
         ,{{round_and_alias('ft_pct_home',2)}} 
-        ,home_team_wins
+        ,home_team_wins AS home_team_wins_id
         ,{{round_and_alias('reb_away')}}
         --,reb_away
         ,{{round_and_alias('ast_away')}}       
