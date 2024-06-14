@@ -9,18 +9,18 @@ source as (
 players_general_info as (
 
     select
-        player_name,
+        player_name
         --DISTINCT(player_name) AS player_name,
         --team_abbreviation,
-        age,
-        player_height,
-        player_weight,
-        college,
-        country,
-        draft_year,
-        draft_round,
-        draft_number,
-        season       
+        ,ROUND(age,0) AS age
+        ,ROUND(player_height,0) AS player_height_cm
+        ,ROUND(player_weight,0) AS player_weight_kg
+        ,college
+        ,country
+        ,draft_year
+        ,draft_round
+        ,draft_number
+        ,season       
     from source
     GROUP BY all
 
