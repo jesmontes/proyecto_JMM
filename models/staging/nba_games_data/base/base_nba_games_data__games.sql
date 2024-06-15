@@ -11,7 +11,10 @@ game_id_duplicados AS (
         home_team_id,
         pts_away,
         reb_away,
-        game_status_text,
+        CASE
+            WHEN pts_away IS NULL or pts_home IS NULL THEN 'Game not played'
+            ELSE game_status_text
+            END AS game_status,
         reb_home,
         game_date_est,
         ast_home,
@@ -24,7 +27,7 @@ game_id_duplicados AS (
         ft_pct_home * 100 AS ft_pct_home,
         ast_away,
         ft_pct_away * 100 AS ft_pct_away,
-        season,
+        {{concat_season('season')}},
         team_id_away,
         team_id_home,
         home_team_wins,
@@ -35,4 +38,4 @@ game_id_duplicados AS (
         FROM src_games 
         
 )
-SELECT * FROM game_id_duplicados where row_num = 1
+SELECT * FROM game_id_duplicados where row_num = 1 
