@@ -1,37 +1,37 @@
-with 
-
-source as (
-
-    select * from {{ ref('base_nba_games_data__games') }}
-
+WITH ranking AS (
+    SELECT * FROM {{ref('base_nba_games_data__playoff_init')}}
+) ,
+games AS (
+    SELECT * FROM {{ref('base_nba_games_data__games')}}
 ),
 
-renamed as (
-
-    select
-        game_id
-        ,game_date_est
-        ,team_id_home
-        ,team_id_away
-        ,{{round_and_alias('pts_home')}}
-        ,{{round_and_alias('pts_away')}}
-        ,{{round_and_alias('reb_home')}}
-        ,{{round_and_alias('ast_home')}}
-        ,{{round_and_alias('fg_pct_home',1)}} 
-        ,{{round_and_alias('fg3_pct_home',1)}} 
-        ,{{round_and_alias('ft_pct_home',1)}} 
-        ,home_team_wins AS home_team_wins_id
-        ,{{round_and_alias('reb_away')}}
-        ,{{round_and_alias('ast_away')}}       
-        ,{{round_and_alias('fg_pct_away',1)}} 
-        ,{{round_and_alias('fg3_pct_away',1)}} 
-        ,{{round_and_alias('ft_pct_away',1)}} 
-        ,season
-        ,game_status
+playoff AS (
+    SELECT
+        a.game_id
+        ,a.game_date_est
+        ,a.team_id_home
+        ,a.team_id_away
+        ,a.pts_home
+        ,a.pts_away
+        ,a.reb_home
+        ,a.ast_home
+        ,a.fg_pct_home 
+        ,a.fg3_pct_home 
+        ,a.ft_pct_home
+        ,a.home_team_wins_id
+        ,a.reb_away
+        ,a.ast_away      
+        ,a.fg_pct_away 
+        ,a.fg3_pct_away 
+        ,a.ft_pct_away
+        ,a.season
+        ,a.game_status
+        ,CASE WHEN a.season = b.season AND a.game_date_est >= b.playoff_init THEN 'Playoff'
+            ELSE 'Regular Season'
+            END AS game_type
         ,_fivetran_synced
-
-    from source
-
+        FROM games a    
+        JOIN ranking b 
+        ON a.season = b.season
 )
-
-select * from renamed 
+SELECT * FROM playoff 
