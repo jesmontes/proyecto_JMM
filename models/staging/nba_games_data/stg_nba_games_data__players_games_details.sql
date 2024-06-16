@@ -15,6 +15,7 @@ WITH base_games AS (
             ,a.team_id                                                          
             ,a.player_id
             ,b.season
+            ,b.season_id
             ,MAX(a._fivetran_synced) AS  _fivetran_synced
             FROM base_games_details a
             JOIN base_games b

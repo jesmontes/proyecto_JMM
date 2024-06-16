@@ -14,6 +14,7 @@ joined AS (
         a.player_id
         ,a.player_name
         ,a.season
+        ,a.season_id
         ,a.team_id
         ,b.age
         ,b.player_height_cm

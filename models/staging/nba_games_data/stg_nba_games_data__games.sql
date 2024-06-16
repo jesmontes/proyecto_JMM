@@ -25,6 +25,7 @@ playoff AS (
         ,a.fg3_pct_away 
         ,a.ft_pct_away
         ,a.season
+        ,a.season_id
         ,a.game_status
         ,CASE WHEN a.season = b.season AND a.game_date_est >= b.playoff_init THEN 'Playoff'
             ELSE 'Regular Season'

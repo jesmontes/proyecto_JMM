@@ -64,6 +64,7 @@ casted as (
         ,{{round_and_alias('fg3_pct_away',1)}} 
         ,{{round_and_alias('ft_pct_away',1)}} 
         ,season
+        ,{{dbt_utils.generate_surrogate_key(['season'])}} AS season_id
         ,game_status
         ,_fivetran_synced
 
