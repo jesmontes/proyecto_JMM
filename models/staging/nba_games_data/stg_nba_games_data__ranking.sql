@@ -8,6 +8,7 @@ WITH base_ranking AS (
                 standingsdate,
                 {{dbt_utils.generate_surrogate_key(['season'])}} AS season_id,
                 season,
+                {{dbt_utils.generate_surrogate_key(['conference'])}} AS conference_id,
                 conference,
                 team_id,
                 team,

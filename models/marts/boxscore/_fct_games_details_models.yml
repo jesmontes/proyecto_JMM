@@ -1,0 +1,87 @@
+version: 2
+
+models:
+  - name: fct_games_details
+    description: "Table containing detailed information about each game, including player and team performance metrics."
+    columns:
+      - name: game_details_id
+        description: "Unique identifier for the game details."
+        tests:
+          - not_null
+          - unique
+      - name: game_id
+        description: "Unique identifier for the game."
+        tests:
+          - not_null
+      - name: team_id
+        description: "Identifier of the team."
+        tests:
+          - not_null
+      - name: player_id
+        description: "Unique identifier for the player."
+        tests:
+          - not_null
+      - name: min
+        description: "Minutes played by the player."
+        
+      - name: pts
+        description: "Points scored by the player."
+       
+      - name: reb
+        description: "Rebounds grabbed by the player."
+        
+      - name: ast
+        description: "Assists distributed by the player."
+        
+      - name: stl
+        description: "Steals by the player."
+        
+      - name: blk
+        description: "Blocks by the player."
+        
+      - name: fgm
+        description: "Field goals made by the player."
+        
+      - name: fga
+        description: "Field goals attempted by the player."
+        
+      - name: fg_pct
+        description: "Field goal percentage of the player."
+        
+      - name: fg3m
+        description: "Three-point field goals made by the player."
+        
+      - name: fg3a
+        description: "Three-point field goals attempted by the player."
+        
+      - name: fg3_pct
+        description: "Three-point field goal percentage of the player."
+        
+      - name: ftm
+        description: "Free throws made by the player."
+        
+      - name: fta
+        description: "Free throws attempted by the player."
+       
+      - name: ft_pct
+        description: "Free throw percentage of the player."
+        
+      - name: oreb
+        description: "Offensive rebounds grabbed by the player."
+        
+      - name: dreb
+        description: "Defensive rebounds grabbed by the player."
+        
+      - name: tos
+        description: "Turnovers by the player."
+        
+      - name: pf
+        description: "Personal fouls by the player."
+        
+      - name: plus_minus
+        description: "Plus/minus statistic of the player."
+        
+      - name: _fivetran_synced
+        description: "Timestamp indicating when the data was last synchronized by Fivetran."
+        tests:
+          - not_null

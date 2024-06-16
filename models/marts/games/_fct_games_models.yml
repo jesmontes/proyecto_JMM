@@ -1,0 +1,91 @@
+version: 2
+
+models:
+  - name: fct_games
+    description: "Table containing aggregated game data, including team performance metrics and game outcomes."
+    columns:
+      - name: game_id
+        description: "Unique identifier for the game."
+        tests:
+          - not_null
+          - unique
+      - name: game_date_est
+        description: "Date of the game in Eastern Standard Time."
+        tests:
+          - not_null
+      - name: team_id_home
+        description: "Identifier of the home team."
+        tests:
+          - not_null
+      - name: team_id_away
+        description: "Identifier of the visiting team."
+        tests:
+          - not_null
+      - name: pts_home
+        description: "Points scored by the home team."
+        tests:
+          - not_null
+      - name: pts_away
+        description: "Points scored by the visiting team."
+        tests:
+          - not_null
+      - name: reb_home
+        description: "Total rebounds by the home team."
+        tests:
+          - not_null
+      - name: ast_home
+        description: "Total assists by the home team."
+        tests:
+          - not_null
+      - name: fg_pct_home
+        description: "Field goal percentage of the home team."
+        tests:
+          - not_null
+      - name: fg3_pct_home
+        description: "Three-point field goal percentage of the home team."
+        tests:
+          - not_null
+      - name: ft_pct_home
+        description: "Free throw percentage of the home team."
+        tests:
+          - not_null
+      - name: home_team_wins_id
+        description: "Indicator if the home team won the game (1) or not (0)."
+        tests:
+          - not_null
+      - name: reb_away
+        description: "Total rebounds by the visiting team."
+        tests:
+          - not_null
+      - name: ast_away
+        description: "Total assists by the visiting team."
+        tests:
+          - not_null
+      - name: fg_pct_away
+        description: "Field goal percentage of the visiting team."
+        tests:
+          - not_null
+      - name: fg3_pct_away
+        description: "Three-point field goal percentage of the visiting team."
+        tests:
+          - not_null
+      - name: ft_pct_away
+        description: "Free throw percentage of the visiting team."
+        tests:
+          - not_null
+      - name: season_id
+        description: "Identifier of the season."
+        tests:
+          - not_null
+      - name: game_status
+        description: "Status of the game."
+        tests:
+          - not_null
+      - name: game_type_id
+        description: "Identifier of the game type, indicating if it is a regular season or playoff game."
+        tests:
+          - not_null
+      - name: _fivetran_synced
+        description: "Timestamp indicating when the data was last synchronized by Fivetran."
+        tests:
+          - not_null
