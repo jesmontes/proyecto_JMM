@@ -1,5 +1,5 @@
 WITH ranking AS (
-    SELECT * FROM {{ref('base_nba_games_data__playoff_init')}}
+    SELECT * FROM {{ref('stg_nba_games_data__playoff_init')}}
 ) ,
 games AS (
     SELECT * FROM {{ref('base_nba_games_data__games')}}

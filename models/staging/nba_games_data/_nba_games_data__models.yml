@@ -415,6 +415,20 @@ models:
               data_type: timestamp_tz
               description: "Timestamp indicating when the record was synced from the source system to the destination."
 
+      - name: stg_nba_games_data__playoff_init
+        description: "Model containing playoff init date by season."
+        columns:
+            - name: season
+              data_type: number
+              description: "Season in which the game is played."
+
+            - name: g
+              data_type: number
+              description: "Number of games in the season."
+              
+            - name: playoff_init
+              data_type: date
+              description: "Playoff init date."
           
                     
           
