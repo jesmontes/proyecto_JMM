@@ -20,7 +20,8 @@ players_general_info as (
         ,draft_year
         ,draft_round
         ,draft_number
-        ,season       
+        ,season 
+        ,_fivetrand_synced     
     from source
     GROUP BY all
 

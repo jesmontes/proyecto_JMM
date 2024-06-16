@@ -23,7 +23,8 @@ joined AS (
         ,b.college
         ,b.draft_year
         ,b.draft_round
-        ,b.draft_number  
+        ,b.draft_number
+        ,a._fivetran_synced  
     FROM stg_players_games a
     JOIN base_players_all_seasons b
     ON a.player_name = b.player_name AND a.season=b.season

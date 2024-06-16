@@ -2,15 +2,8 @@
 version: 2
 
 models:
-    # - name: base_nba_games_data__players
-    #   description: "Base de jugadores de nba_games_data"
-    #   columns:
-    #       - name: player_id
-    #         description: "The primary key for this table"
-    #         tests:
-                
-    #             - not_null
-      - name: base_nba_games_data__players
+
+      - name: base_nba_games_data__games
         description: "Model containing information about the games."
         columns:
          
@@ -308,7 +301,7 @@ models:
               data_type: timestamp_tz
               description: "Timestamp indicating when the record was synced from the source system to the destination."
         
-      - name: teams
+      - name: base_nba_games_data__teams
         description: "Model containing information about the teams."
         columns:
             - name: _FIVETRAN_ID
