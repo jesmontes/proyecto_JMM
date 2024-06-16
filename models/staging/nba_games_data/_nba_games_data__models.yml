@@ -407,9 +407,17 @@ models:
               data_type: varchar
               description: "Conference of the team."
 
-            - name: conference
+            - name: division
               data_type: varchar
               description: "Division of the team."
+            
+            - name: conference_id
+              data_type: varchar
+              description: "Unique identifier of conference of the team."
+
+            - name: division_id
+              data_type: varchar
+              description: "Unique identifier of division of the team."
             
             - name: _FIVETRAN_SYNCED
               data_type: timestamp_tz

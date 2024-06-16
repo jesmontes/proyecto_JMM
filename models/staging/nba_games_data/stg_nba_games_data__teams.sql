@@ -15,7 +15,10 @@ WITH base_teams AS (
             ,abbreviation
             ,dleagueaffiliation
             ,team_id
-            ,{{add_conference_and_division('abbreviation')}}
+            ,{{dbt_utils.generate_surrogate_key(['conference'])}} AS conference_id
+            ,conference
+            ,{{dbt_utils.generate_surrogate_key(['division'])}} AS division_id
+            ,division
             ,_fivetran_synced
 
         from base_teams
