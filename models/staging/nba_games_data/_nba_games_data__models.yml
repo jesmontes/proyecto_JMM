@@ -273,7 +273,7 @@ models:
           
           - name: age
             data_type: number
-            description: "Age of player ."
+            description: "Age of the player."
 
           - name: player_height_cm
             data_type: number

@@ -34,5 +34,32 @@ playoff AS (
         FROM games a    
         JOIN ranking b 
         ON a.season = b.season
+),
+
+id_game_type AS (
+
+        SELECT  game_id
+                ,game_date_est
+                ,team_id_home
+                ,team_id_away
+                ,pts_home
+                ,pts_away
+                ,reb_home
+                ,ast_home
+                ,fg_pct_home 
+                ,fg3_pct_home 
+                ,ft_pct_home
+                ,home_team_wins_id
+                ,reb_away
+                ,ast_away      
+                ,fg_pct_away 
+                ,fg3_pct_away 
+                ,ft_pct_away
+                ,season
+                ,season_id
+                ,game_status
+                ,{{dbt_utils.generate_surrogate_key(['game_type'])}} AS game_type_id
+                ,game_type
+                ,_fivetran_synced
 )
-SELECT * FROM playoff 
+SELECT * FROM id_game_type 

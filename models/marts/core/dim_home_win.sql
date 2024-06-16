@@ -3,7 +3,7 @@ WITH stg_nba_games AS (
     SELECT * FROM {{ref('stg_nba_games_data__games')}}
 ),
 
-home_win AS (
+dim_home_win AS (
     SELECT 
         DISTINCT home_team_wins_id,
         CASE
@@ -13,4 +13,4 @@ home_win AS (
     FROM stg_nba_games
 )
 
-SELECT * FROM home_win
+SELECT * FROM dim_home_win
