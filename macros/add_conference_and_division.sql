@@ -10,8 +10,8 @@
     END AS division,
 
     CASE
-        WHEN {{ abbreviation_team }} IN ('ATL', 'CHA', 'MIA', 'ORL', 'WAS', 'BOS', 'BKN', 'NYK', 'PHI', 'TOR', 'CHI', 'CLE', 'DET', 'IND', 'MIL') THEN 'Eastern'
-        WHEN {{ abbreviation_team }} IN ('DAL', 'HOU', 'MEM', 'NOP', 'SAS', 'DEN', 'MIN', 'OKC', 'POR', 'UTA', 'GSW', 'LAC', 'LAL', 'PHX', 'SAC') THEN 'Western'
+        WHEN {{ abbreviation_team }} IN ('ATL', 'CHA', 'MIA', 'ORL', 'WAS', 'BOS', 'BKN', 'NYK', 'PHI', 'TOR', 'CHI', 'CLE', 'DET', 'IND', 'MIL') THEN 'East'
+        WHEN {{ abbreviation_team }} IN ('DAL', 'HOU', 'MEM', 'NOP', 'SAS', 'DEN', 'MIN', 'OKC', 'POR', 'UTA', 'GSW', 'LAC', 'LAL', 'PHX', 'SAC') THEN 'West'
         ELSE 'Unknown'
     END AS conference
 {% endmacro %}
