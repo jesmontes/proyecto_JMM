@@ -59,7 +59,7 @@ WITH stg_games AS (
                 ,b.blk
                 ,b.pts
                 ,b.ftm
-                ,b.first_name
+                --,b.first_name
                 ,b.dreb
                 ,b.team_id
                 ,b.fg3_pct

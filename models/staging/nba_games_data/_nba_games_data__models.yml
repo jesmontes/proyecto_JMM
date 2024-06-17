@@ -396,6 +396,12 @@ models:
   - name: stg_nba_games_data__ranking
     description: "Model containing information about team rankings."
     columns:
+      - name: ranking_id
+        description: "Unique identifier for the ranking."
+        tests:
+          - not_null
+          - unique
+          
       - name: team_id
         data_type: number
         description: "Identifier of the team."
