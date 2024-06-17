@@ -1,6 +1,6 @@
-WITH stg_games AS (
+WITH stg_teams AS (
 
-        SELECT * FROM {{ref('stg_nba_games_data__games')}}
+        SELECT * FROM {{ref('stg_nba_games_data__teams')}}
 
 ),
 
@@ -8,7 +8,7 @@ WITH stg_games AS (
 
         SELECT DISTINCT conference_id AS conference_id,
         conference
-        FROM stg_games
+        FROM stg_teams
     )
 
 SELECT * FROM dim_conference

@@ -17,10 +17,16 @@ models:
         description: "Identifier of the home team."
         tests:
           - not_null
+          - relationships:
+              to: ref('dim_teams')
+              field: team_id
       - name: team_id_away
         description: "Identifier of the visiting team."
         tests:
           - not_null
+          - relationships:
+              to: ref('dim_teams')
+              field: team_id
       - name: pts_home
         description: "Points scored by the home team."
         tests:
@@ -41,18 +47,26 @@ models:
         description: "Field goal percentage of the home team."
         tests:
           - not_null
+          - accepted_values:
+              values: "range(0.0, 100.0)"
       - name: fg3_pct_home
         description: "Three-point field goal percentage of the home team."
         tests:
           - not_null
+          - accepted_values:
+              values: "range(0.0, 100.0)"
       - name: ft_pct_home
         description: "Free throw percentage of the home team."
         tests:
           - not_null
+          - accepted_values:
+              values: "range(0.0, 100.0)"
       - name: home_team_wins_id
         description: "Indicator if the home team won the game (1) or not (0)."
         tests:
           - not_null
+          - accepted_values:
+              values: [0, 1]
       - name: reb_away
         description: "Total rebounds by the visiting team."
         tests:
@@ -65,18 +79,27 @@ models:
         description: "Field goal percentage of the visiting team."
         tests:
           - not_null
+          - accepted_values:
+              values: "range(0.0, 100.0)"
       - name: fg3_pct_away
         description: "Three-point field goal percentage of the visiting team."
         tests:
           - not_null
+          - accepted_values:
+              values: "range(0.0, 100.0)"
       - name: ft_pct_away
         description: "Free throw percentage of the visiting team."
         tests:
           - not_null
+          - accepted_values:
+              values: "range(0.0, 100.0)"
       - name: season_id
         description: "Identifier of the season."
         tests:
           - not_null
+          - relationships:
+              to: ref('dim_season')
+              field: season_id
       - name: game_status
         description: "Status of the game."
         tests:
@@ -85,6 +108,9 @@ models:
         description: "Identifier of the game type, indicating if it is a regular season or playoff game."
         tests:
           - not_null
+          - relationships:
+              to: ref('dim_game_type')
+              field: game_type_id
       - name: _fivetran_synced
         description: "Timestamp indicating when the data was last synchronized by Fivetran."
         tests:

@@ -1,0 +1,72 @@
+version: 2
+
+models:
+  - name: fct_ranking
+    description: "Table containing team ranking data, including wins, losses, and records for home and away games."
+    columns:
+      - name: ranking_id
+        description: "Unique identifier for the ranking."
+        tests:
+          - not_null
+          - unique
+      - name: standingsdate
+        description: "Date of the ranking."
+        tests:
+          - not_null
+      - name: season_id
+        description: "Identifier of the season."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_season')
+              field: season_id
+      - name: conference_id
+        description: "Identifier of the conference."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_conference')
+              field: conference_id
+      - name: team_id
+        description: "Identifier of the team."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_teams')
+              field: team_id
+      - name: g
+        description: "Number of games played by the team."
+        tests:
+          - not_null
+          - accepted_values:
+              values: "range(0, 83)"
+      - name: w
+        description: "Number of games won by the team."
+        tests:
+          - not_null
+          - accepted_values:
+              values: "range(0, 83)"
+      - name: l
+        description: "Number of games lost by the team."
+        tests:
+          - not_null
+          - accepted_values:
+              values: "range(0, 83)"
+      - name: w_pct
+        description: "Winning percentage of the team."
+        tests:
+          - not_null
+          - accepted_values:
+              values: "range(0.0, 100.0)"
+      - name: road_record
+        description: "Record of the team's performance in away games."
+        tests:
+          - not_null
+      - name: home_record
+        description: "Record of the team's performance in home games."
+        tests:
+          - not_null
+      - name: _fivetran_synced
+        description: "Timestamp indicating when the data was last synchronized by Fivetran."
+        tests:
+          - not_null

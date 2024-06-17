@@ -65,10 +65,16 @@ models:
         description: "Identifier for the conference to which the team belongs."
         tests:
           - not_null
+          - relationships:
+              to: ref('dim_conference')
+              field: conference_id
       - name: division_id
         description: "Identifier for the division to which the team belongs."
         tests:
           - not_null
+          - relationships:
+              to: ref('dim_division')
+              field: division_id
       - name: nickname
         description: "Nickname of the NBA team."
         tests:
@@ -174,10 +180,16 @@ models:
         description: "Unique identifier for the season."
         tests:
           - not_null
+          - relationships:
+              to: ref('dim_season')
+              field: season_id
       - name: team_id
         description: "Identifier of the player's team."
         tests:
           - not_null
+          - relationships:
+              to: ref('dim_teams')
+              field: team_id
       - name: age
         description: "Age of the player."
         tests:
@@ -208,6 +220,19 @@ models:
           - not_null
       - name: draft_number
         description: "The number at which the player was picked in his draft round."
+        tests:
+          - not_null
+
+  - name: dim_division
+    description: "Dimension table containing distinct divisions from NBA teams."
+    columns:
+      - name: division_id
+        description: "Identifier of the division."
+        tests:
+          - not_null
+          - unique
+      - name: division
+        description: "Name of the division."
         tests:
           - not_null
 

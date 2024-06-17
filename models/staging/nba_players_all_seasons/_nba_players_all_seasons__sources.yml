@@ -15,6 +15,9 @@ sources:
           - name: id_player
             data_type: number
             description: "Unique identifier for the player."
+            tests:
+              - not_null
+              - unique
           - name: player_name
             data_type: varchar
             description: "Name of the player."

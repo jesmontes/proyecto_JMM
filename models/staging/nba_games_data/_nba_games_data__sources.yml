@@ -1,4 +1,7 @@
-version: 2
+WITH src_ranking AS (
+        SELECT * FROM {{source('__nba_games_data','ranking')}} WHERE season_id LIKE '2%'
+),
+    version: 2
 
 sources:
   - name: __nba_games_data
@@ -15,72 +18,125 @@ sources:
           - name: game_date_est
             data_type: date
             description: "Date of the game in Eastern Standard Time."
+            tests:
+              - not_null
           - name: game_id
             data_type: number
             description: "Unique identifier for the game."
+            tests:
+              - not_null
+              - unique
           - name: game_status_text
             data_type: varchar
             description: "Status of the game."
           - name: home_team_id
             data_type: number
             description: "Identifier of the home team."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('__nba_games_data', 'teams')
+                  field: team_id
           - name: visitor_team_id
             data_type: number
             description: "Identifier of the visiting team."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('__nba_games_data', 'teams')
+                  field: team_id
           - name: season
             data_type: number
             description: "Season in which the game is played."
           - name: team_id_home
             data_type: number
             description: "Identifier of the home team (duplicate)."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('__nba_games_data', 'teams')
+                  field: team_id
           - name: pts_home
             data_type: number
             description: "Points scored by the home team."
+            tests:
+              - not_null
           - name: fg_pct_home
             data_type: number
             description: "Field goal percentage of the home team."
+            tests:
+              - not_null
           - name: ft_pct_home
             data_type: number
             description: "Free throw percentage of the home team."
+            tests:
+              - not_null
           - name: fg3_pct_home
             data_type: number
             description: "Three-point field goal percentage of the home team."
+            tests:
+              - not_null
           - name: ast_home
             data_type: number
             description: "Number of assists by the home team."
+            tests:
+              - not_null
           - name: reb_home
             data_type: number
             description: "Number of rebounds by the home team."
+            tests:
+              - not_null
           - name: team_id_away
             data_type: number
             description: "Identifier of the visiting team."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('__nba_games_data', 'teams')
+                  field: team_id                 
+                  # type: many_to_one          
           - name: pts_away
             data_type: number
             description: "Points scored by the visiting team."
+            tests:
+              - not_null
           - name: fg_pct_away
             data_type: number
             description: "Field goal percentage of the visiting team."
+            tests:
+              - not_null
           - name: ft_pct_away
             data_type: number
             description: "Free throw percentage of the visiting team."
+            tests:
+              - not_null
           - name: fg3_pct_away
             data_type: number
             description: "Three-point field goal percentage of the visiting team."
+            tests:
+              - not_null
           - name: ast_away
             data_type: number
             description: "Number of assists by the visiting team."
+            tests:
+              - not_null
           - name: reb_away
             data_type: number
             description: "Number of rebounds by the visiting team."
+            tests:
+              - not_null
           - name: home_team_wins
             data_type: number
             description: "Indicates if the home team won the game."
+            tests:
+              - not_null
           - name: _FIVETRAN_DELETED
             data_type: boolean
             description: "Flag indicating whether the record has been deleted in the source system."
           - name: _FIVETRAN_SYNCED
             data_type: timestamp_tz
             description: "Timestamp indicating when the record was synced from the source system to the destination."
+        
 
       - name: game_details
         description: "Table containing details of each game."
@@ -91,9 +147,19 @@ sources:
           - name: game_id
             data_type: number
             description: "Unique identifier for the game."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('__nba_games_data', 'games')
+                  field: game_id  
           - name: team_id
             data_type: number
             description: "Identifier of the team."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('__nba_games_data', 'teams')
+                  field: team_id  
           - name: team_abbreviation
             data_type: varchar
             description: "Abbreviation of the team."
@@ -181,6 +247,7 @@ sources:
           - name: _FIVETRAN_SYNCED
             data_type: timestamp_tz
             description: "Timestamp indicating when the record was synced from the source system to the destination."
+        
 
       - name: players
         description: "Table containing information about the players."
@@ -194,9 +261,17 @@ sources:
           - name: team_id
             data_type: number
             description: "Identifier of the player's team."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('__nba_games_data', 'teams')
+                  field: team_id  
           - name: player_id
             data_type: number
             description: "Unique identifier for the player."
+            tests:
+              - not_null
+              - unique
           - name: season
             data_type: number
             description: "Season in which the player is playing."
@@ -206,7 +281,6 @@ sources:
           - name: _FIVETRAN_SYNCED
             data_type: timestamp_tz
             description: "Timestamp indicating when the record was synced from the source system to the destination."
-
       - name: ranking
         description: "Table containing information about team rankings."
         columns:
@@ -216,6 +290,11 @@ sources:
           - name: team_id
             data_type: number
             description: "Identifier of the team."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('__nba_games_data', 'teams')
+                  field: team_id  
           - name: league_id
             data_type: number
             description: "Identifier of the league."
@@ -271,6 +350,9 @@ sources:
           - name: team_id
             data_type: number
             description: "Identifier of the team."
+            tests:
+              - not_null
+              - unique
           - name: min_year
             data_type: number
             description: "Minimum year of participation."

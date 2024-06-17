@@ -2,50 +2,71 @@ version: 2
 
 models:
 
-      - name: stg_nba_players_all_seasons__players
-        description: "Model contains detailed information about NBA players since 2003."
-        columns:
-                       
-          - name: player_name
-            data_type: varchar
-            description: "Name of the player."
-          
-          - name: age
-            data_type: number
-            description: "Age of the player."
-          
-          - name: player_height_cm
-            data_type: number
-            description: "Height of the player (in centimeters)."
-          
-          - name: player_weight_kg
-            data_type: number
-            description: "Weight of the player (in kilograms)."
-          
-          - name: college
-            data_type: varchar
-            description: "Name of the college the player attended."
-          
-          - name: country
-            data_type: varchar
-            description: "Name of the country the player was born in (not necessarily the nationality)."
-          
-          - name: draft_year
-            data_type: varchar
-            description: "The year the player was drafted."
-          
-          - name: draft_round
-            data_type: varchar
-            description: "The draft round the player was picked."
-          
-          - name: draft_number
-            data_type: varchar
-            description: "The number at which the player was picked in his draft round."
-         
-          - name: season
-            data_type: varchar
-            description: "NBA season."
-               
-          - name: _FIVETRAN_SYNCED
-            data_type: timestamp_tz
-            description: "Timestamp indicating when the record was synced from the source system to the destination."
+  - name: stg_nba_players_all_seasons__players
+    description: "Model contains detailed information about NBA players since 2003."
+    columns:
+      - name: player_name
+        data_type: varchar
+        description: "Name of the player."
+        tests:
+          - not_null
+
+      - name: age
+        data_type: number
+        description: "Age of the player."
+        tests:
+          - not_null
+
+      - name: player_height_cm
+        data_type: number
+        description: "Height of the player (in centimeters)."
+        tests:
+          - not_null
+
+      - name: player_weight_kg
+        data_type: number
+        description: "Weight of the player (in kilograms)."
+        tests:
+          - not_null
+
+      - name: college
+        data_type: varchar
+        description: "Name of the college the player attended."
+        tests:
+          - not_null
+
+      - name: country
+        data_type: varchar
+        description: "Name of the country the player was born in (not necessarily the nationality)."
+        tests:
+          - not_null
+
+      - name: draft_year
+        data_type: varchar
+        description: "The year the player was drafted."
+        tests:
+          - not_null
+
+      - name: draft_round
+        data_type: varchar
+        description: "The draft round the player was picked."
+        tests:
+          - not_null
+
+      - name: draft_number
+        data_type: varchar
+        description: "The number at which the player was picked in his draft round."
+        tests:
+          - not_null
+
+      - name: season
+        data_type: varchar
+        description: "NBA season."
+        tests:
+          - not_null
+
+      - name: _FIVETRAN_SYNCED
+        data_type: timestamp_tz
+        description: "Timestamp indicating when the record was synced from the source system to the destination."
+        tests:
+          - not_null
