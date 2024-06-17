@@ -5,7 +5,8 @@ WITH stg_games AS (
     fct_games AS (
 
         SELECT 
-                game_id
+                _fivetran_id
+                ,game_id
                 ,game_date_est
                 ,team_id_home
                 ,team_id_away
@@ -25,6 +26,7 @@ WITH stg_games AS (
                 ,season_id
                 ,game_status
                 ,game_type_id
+                ,_fivetran_deleted
                 ,_fivetran_synced
 
             FROM stg_games

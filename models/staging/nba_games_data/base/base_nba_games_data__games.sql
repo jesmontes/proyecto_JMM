@@ -46,7 +46,8 @@ row_num AS(
 casted as (
 
     select
-        game_id
+        _fivetran_id
+        ,game_id
         ,game_date_est
         ,team_id_home
         ,team_id_away
@@ -66,6 +67,7 @@ casted as (
         ,season
         ,{{dbt_utils.generate_surrogate_key(['season'])}} AS season_id
         ,game_status
+        ,_fivetran_deleted
         ,_fivetran_synced
 
     from row_num

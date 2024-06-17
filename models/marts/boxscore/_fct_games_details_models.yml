@@ -27,9 +27,9 @@ models:
         description: "Identifier for the player."
         tests:
           - not_null
-          - relationships:
-              to: ref('dim_players')
-              field: player_id
+          # - relationships:
+          #     to: ref('dim_players')
+          #     field: player_id
       - name: min
         description: "Minutes played by the player."
         

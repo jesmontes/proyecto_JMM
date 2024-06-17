@@ -47,6 +47,7 @@ key_game_details AS (
 
 duplicados AS (
     SELECT
+        _fivetran_id,
         game_details_id, 
         game_id,
         fg3m,
@@ -77,6 +78,7 @@ duplicados AS (
         fg3_pct * 100 AS fg3_pct,
         tos,
         player_id,
+        _fivetran_deleted,
         _fivetran_synced,
         ROW_NUMBER() OVER (PARTITION BY game_details_id ORDER BY _fivetran_synced DESC) AS row_num
 

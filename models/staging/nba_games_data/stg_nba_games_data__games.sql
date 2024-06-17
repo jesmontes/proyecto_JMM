@@ -7,7 +7,8 @@ games AS (
 
 playoff AS (
     SELECT
-        a.game_id
+        _fivetran_id
+        ,a.game_id
         ,a.game_date_est
         ,a.team_id_home
         ,a.team_id_away
@@ -30,6 +31,7 @@ playoff AS (
         ,CASE WHEN a.season = b.season AND a.game_date_est >= b.playoff_init THEN 'Playoff'
             ELSE 'Regular Season'
             END AS game_type
+        ,_fivetran_deleted
         ,_fivetran_synced
         FROM games a    
         JOIN ranking b 
@@ -38,7 +40,9 @@ playoff AS (
 
 id_game_type AS (
 
-        SELECT  game_id
+        SELECT  
+                _fivetran_id
+                ,game_id
                 ,game_date_est
                 ,team_id_home
                 ,team_id_away
@@ -60,6 +64,7 @@ id_game_type AS (
                 ,game_status
                 ,{{dbt_utils.generate_surrogate_key(['game_type'])}} AS game_type_id
                 ,game_type
+                ,_fivetran_deleted
                 ,_fivetran_synced
                 FROM playoff
 )

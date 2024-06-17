@@ -4,6 +4,7 @@ WITH base_games_details AS (
 
     games_details_casted AS (
         SELECT
+            _fivetran_id,
             game_details_id, 
             game_id,
             {{round_and_alias('fg3m')}},
@@ -28,12 +29,13 @@ WITH base_games_details AS (
             {{round_and_alias('blk')}},
             {{round_and_alias('pts')}},
             {{round_and_alias('ftm')}},
-            first_name,
+            --first_name,
             {{round_and_alias('dreb')}},
             team_id,
             {{round_and_alias('fg3_pct',1)}},
             {{round_and_alias('tos')}},
             player_id,
+            _fivetran_deleted,
             _fivetran_synced
 
         FROM base_games_details

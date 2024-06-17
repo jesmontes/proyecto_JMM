@@ -72,4 +72,4 @@ WITH stg_games AS (
                 ON a.game_id = b.game_id
     )
 
-SELECT * FROM joined
+SELECT * FROM joined order by game_id
