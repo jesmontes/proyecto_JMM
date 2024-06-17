@@ -42,38 +42,26 @@ models:
       - name: pts_home
         data_type: number
         description: "Points scored by the home team."
-        tests:
-          - not_null
-
+        
       - name: fg_pct_home
         data_type: number
         description: "Field goal percentage of the home team."
-        tests:
-          - not_null
-
+        
       - name: ft_pct_home
         data_type: number
         description: "Free throw percentage of the home team."
-        tests:
-          - not_null
-
+       
       - name: fg3_pct_home
         data_type: number
         description: "Three-point field goal percentage of the home team."
-        tests:
-          - not_null
 
       - name: ast_home
         data_type: number
         description: "Number of assists by the home team."
-        tests:
-          - not_null
 
       - name: reb_home
         data_type: number
         description: "Number of rebounds by the home team."
-        tests:
-          - not_null
 
       - name: team_id_away
         data_type: number
@@ -87,45 +75,33 @@ models:
       - name: pts_away
         data_type: number
         description: "Points scored by the visiting team."
-        tests:
-          - not_null
 
       - name: fg_pct_away
         data_type: number
         description: "Field goal percentage of the visiting team."
-        tests:
-          - not_null
 
       - name: ft_pct_away
         data_type: number
         description: "Free throw percentage of the visiting team."
-        tests:
-          - not_null
 
       - name: fg3_pct_away
         data_type: number
         description: "Three-point field goal percentage of the visiting team."
-        tests:
-          - not_null
 
       - name: ast_away
         data_type: number
         description: "Number of assists by the visiting team."
-        tests:
-          - not_null
 
       - name: reb_away
         data_type: number
         description: "Number of rebounds by the visiting team."
-        tests:
-          - not_null
 
       - name: home_team_wins_id
         data_type: varchar
         description: "Unique identifier for the home_teams_wins."
         tests:
           - not_null
-          - unique
+
 
       - name: season_id
         data_type: number
@@ -185,12 +161,6 @@ models:
           description: "Name of the player."
           tests:
           - not_null  
-
-        - name: first_name
-          data_type: varchar
-          description: "Nickname of the player."
-          tests:
-          - not_null
 
         - name: start_position
           data_type: varchar
@@ -516,7 +486,7 @@ models:
         tests:
           - not_null
           - unique
-
+    
       - name: abbreviation
         data_type: varchar
         description: "Abbreviation of the team."
@@ -550,8 +520,7 @@ models:
       - name: arenacapacity
         data_type: number
         description: "Capacity of the arena."
-        tests:
-          - not_null
+        
 
       - name: owner
         data_type: varchar

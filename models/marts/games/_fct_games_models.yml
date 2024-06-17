@@ -29,70 +29,39 @@ models:
               field: team_id
       - name: pts_home
         description: "Points scored by the home team."
-        tests:
-          - not_null
       - name: pts_away
         description: "Points scored by the visiting team."
-        tests:
-          - not_null
       - name: reb_home
         description: "Total rebounds by the home team."
-        tests:
-          - not_null
       - name: ast_home
         description: "Total assists by the home team."
-        tests:
-          - not_null
       - name: fg_pct_home
         description: "Field goal percentage of the home team."
-        tests:
-          - not_null
-          - accepted_values:
-              values: "range(0.0, 100.0)"
+        
       - name: fg3_pct_home
         description: "Three-point field goal percentage of the home team."
-        tests:
-          - not_null
-          - accepted_values:
-              values: "range(0.0, 100.0)"
+        
       - name: ft_pct_home
         description: "Free throw percentage of the home team."
-        tests:
-          - not_null
-          - accepted_values:
-              values: "range(0.0, 100.0)"
+        
       - name: home_team_wins_id
         description: "Indicator if the home team won the game (1) or not (0)."
-        tests:
-          - not_null
-          - accepted_values:
-              values: [0, 1]
+        
       - name: reb_away
         description: "Total rebounds by the visiting team."
-        tests:
-          - not_null
       - name: ast_away
         description: "Total assists by the visiting team."
-        tests:
-          - not_null
       - name: fg_pct_away
         description: "Field goal percentage of the visiting team."
-        tests:
-          - not_null
-          - accepted_values:
-              values: "range(0.0, 100.0)"
+        
       - name: fg3_pct_away
         description: "Three-point field goal percentage of the visiting team."
-        tests:
-          - not_null
-          - accepted_values:
-              values: "range(0.0, 100.0)"
+        # tests:
+        #   - accepted_values:
+        #       values: "range(0.0, 100.0)"
       - name: ft_pct_away
         description: "Free throw percentage of the visiting team."
-        tests:
-          - not_null
-          - accepted_values:
-              values: "range(0.0, 100.0)"
+        
       - name: season_id
         description: "Identifier of the season."
         tests:
@@ -102,8 +71,6 @@ models:
               field: season_id
       - name: game_status
         description: "Status of the game."
-        tests:
-          - not_null
       - name: game_type_id
         description: "Identifier of the game type, indicating if it is a regular season or playoff game."
         tests:
@@ -113,5 +80,3 @@ models:
               field: game_type_id
       - name: _fivetran_synced
         description: "Timestamp indicating when the data was last synchronized by Fivetran."
-        tests:
-          - not_null

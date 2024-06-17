@@ -4,7 +4,8 @@ WITH src_teams AS (
 
      teams AS (
         select
-             yearfounded
+            _fivetran_id
+             ,yearfounded
             ,arenacapacity
             ,nickname
             ,arena
@@ -15,6 +16,7 @@ WITH src_teams AS (
             ,dleagueaffiliation
             ,team_id
             ,{{add_conference_and_division('abbreviation')}}
+            ,_fivetran_deleted
             ,_fivetran_synced
 
         from src_teams

@@ -1,7 +1,4 @@
-WITH src_ranking AS (
-        SELECT * FROM {{source('__nba_games_data','ranking')}} WHERE season_id LIKE '2%'
-),
-    version: 2
+version: 2
 
 sources:
   - name: __nba_games_data

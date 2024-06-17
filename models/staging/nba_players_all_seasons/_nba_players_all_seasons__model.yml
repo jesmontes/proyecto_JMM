@@ -5,6 +5,12 @@ models:
   - name: stg_nba_players_all_seasons__players
     description: "Model contains detailed information about NBA players since 2003."
     columns:
+      - name: _FIVETRAN_ID
+        data_type: varchar
+        description: "Unique identifier provided by Fivetran for each record."
+        tests:
+        - not_null
+        - unique     
       - name: player_name
         data_type: varchar
         description: "Name of the player."
@@ -64,6 +70,11 @@ models:
         description: "NBA season."
         tests:
           - not_null
+      - name: _FIVETRAN_DELETED
+        data_type: boolean
+        description: "Flag indicating whether the record has been deleted in the source system."
+        tests:
+          - not_null 
 
       - name: _FIVETRAN_SYNCED
         data_type: timestamp_tz

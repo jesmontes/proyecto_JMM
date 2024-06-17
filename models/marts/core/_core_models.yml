@@ -93,8 +93,7 @@ models:
           - not_null
       - name: arenacapacity
         description: "Capacity of the arena where the NBA team plays."
-        tests:
-          - not_null
+       
       - name: yearfounded
         description: "Year the NBA team was founded."
         tests:

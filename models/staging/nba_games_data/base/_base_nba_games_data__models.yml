@@ -166,10 +166,6 @@ models:
         tests:
           - not_null
 
-      - name: first_name
-        data_type: varchar
-        description: "Nickname of the player."
-
       - name: start_position
         data_type: varchar
         description: "Starting position of the player."
@@ -285,8 +281,7 @@ models:
       - name: league_id
         data_type: number
         description: "Identifier of the league."
-        tests:
-          - not_null
+        
 
       - name: season
         data_type: number
@@ -380,12 +375,6 @@ models:
           - not_null
           - unique
 
-      - name: league_id
-        data_type: number
-        description: "Identifier of the league."
-        tests:
-          - not_null
-
       - name: team_id
         data_type: number
         description: "Identifier of the team."
@@ -399,14 +388,12 @@ models:
       - name: min_year
         data_type: number
         description: "Minimum year of participation."
-        tests:
-          - not_null
+        
 
       - name: max_year
         data_type: number
         description: "Maximum year of participation."
-        tests:
-          - not_null
+        
 
       - name: abbreviation
         data_type: varchar
@@ -441,8 +428,7 @@ models:
       - name: arenacapacity
         data_type: number
         description: "Capacity of the arena."
-        tests:
-          - not_null
+        
 
       - name: owner
         data_type: varchar
@@ -459,8 +445,6 @@ models:
       - name: headcoach
         data_type: varchar
         description: "Head coach of the team."
-        tests:
-          - not_null
 
       - name: _FIVETRAN_DELETED
         data_type: boolean

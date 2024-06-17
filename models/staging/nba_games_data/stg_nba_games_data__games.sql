@@ -61,5 +61,6 @@ id_game_type AS (
                 ,{{dbt_utils.generate_surrogate_key(['game_type'])}} AS game_type_id
                 ,game_type
                 ,_fivetran_synced
+                FROM playoff
 )
 SELECT * FROM id_game_type 
