@@ -18,6 +18,7 @@ WITH stg_ranking AS (
                 road_record,            
                 home_record,
                 _fivetran_synced
+            FROM stg_ranking
 
     )
 

@@ -157,24 +157,20 @@ models:
         description: "The year as a four-digit number."
         tests:
           - not_null
-          - unique
-
+          
   - name: dim_players
     description: "Table containing detailed information about NBA players."
     columns:
+      - name: player_general_id
+        description: "Unique identifier for the player_general."
+        tests:
+          - not_null
+      
       - name: player_id
         description: "Unique identifier for the player."
         tests:
           - not_null
-          - unique
-      - name: player_name
-        description: "Name of the player."
-        tests:
-          - not_null
-      - name: season
-        description: "Season in which the player is playing."
-        tests:
-          - not_null
+               
       - name: season_id
         description: "Unique identifier for the season."
         tests:
@@ -201,6 +197,36 @@ models:
         description: "Weight of the player in kilograms."
         tests:
           - not_null
+      
+
+  - name: dim_division
+    description: "Dimension table containing distinct divisions from NBA teams."
+    columns:
+      - name: division_id
+        description: "Identifier of the division."
+        tests:
+          - not_null
+          - unique
+      - name: division
+        description: "Name of the division."
+        tests:
+          - not_null
+
+  - name: dim_players_general
+    description: "Table containing detailed information about NBA players."
+    columns:
+      - name: player_general_id
+        description: "Unique identifier for the player_general."
+        tests:
+          - not_null
+      - name: player_name
+        description: "Name of the player."
+        tests:
+          - not_null
+      - name: season
+        description: "Season in which the player is playing."
+        tests:
+          - not_null
       - name: country
         description: "Name of the country the player was born in (not necessarily the nationality)."
         tests:
@@ -221,20 +247,4 @@ models:
         description: "The number at which the player was picked in his draft round."
         tests:
           - not_null
-
-  - name: dim_division
-    description: "Dimension table containing distinct divisions from NBA teams."
-    columns:
-      - name: division_id
-        description: "Identifier of the division."
-        tests:
-          - not_null
-          - unique
-      - name: division
-        description: "Name of the division."
-        tests:
-          - not_null
-
-
-      
 

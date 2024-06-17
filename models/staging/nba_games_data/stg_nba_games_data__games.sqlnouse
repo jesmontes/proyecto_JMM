@@ -28,16 +28,13 @@ playoff AS (
         ,a.season
         ,a.season_id
         ,a.game_status
-        ,CASE   WHEN a.season = b.season AND a.game_date_est >= b.playoff_init THEN 'Playoff'
-                --WHEN a.season = b.season AND a.game_date_est >= b.playoff_init THEN 'Playoff'
-                WHEN a.season = b.season AND a.game_date_est < b.playoff_init THEN 'Regular Season'
-
+        ,CASE WHEN a.season = b.season AND a.game_date_est >= b.playoff_init THEN 'Playoff'
             ELSE 'Regular Season'
             END AS game_type
         ,_fivetran_deleted
         ,_fivetran_synced
         FROM games a    
-        LEFT JOIN playoff_init b 
+        JOIN playoff_init b 
         ON a.season = b.season
 ),
 
@@ -71,4 +68,4 @@ id_game_type AS (
                 ,_fivetran_synced
                 FROM playoff
 )
-SELECT * FROM id_game_type
+SELECT * FROM id_game_type 

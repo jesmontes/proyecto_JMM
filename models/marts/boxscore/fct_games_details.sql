@@ -9,6 +9,7 @@ WITH int_games__games_details AS (
             
             game_details_id, 
             game_id,
+            game_type_id,
             game_date_est,
             team_id,
             player_id,

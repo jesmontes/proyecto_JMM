@@ -16,6 +16,13 @@ models:
           - relationships:
               to: ref('fct_games')
               field: game_id
+      - name: game_type_id
+        description: "Identifier of the game type, indicating if it is a regular season or playoff game."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_game_type')
+              field: game_type_id
       - name: team_id
         description: "Unique identifier for the team."
         tests:

@@ -1,26 +1,46 @@
-WITH base_ranking AS (
-        SELECT * FROM {{ref('base_nba_games_data__ranking')}} WHERE season_id LIKE '2%'
-),
-       
-    num_part_liga_reg AS (
-        SELECT  
+ WITH base_ranking AS (
+
+        SELECT * FROM {{ref('base_nba_games_data__ranking')}}
+ ),
+ 
+ 
+ playoff_82 AS (  SELECT  
                 season,
-                MAX(g) AS g
+                MIN(standingsdate) AS playoff_init,
+                MIN(g) AS g
                 FROM base_ranking
-                where season_id LIKE '2%'
-                group by 1 
-        ),
+                where standingsdate > '2004-01-01' AND  season_id LIKE '2%' AND g=82               
+                group by all
+                 order by 1
+                 ),
+    playoff_lockout AS (
+     SELECT  
+                season,
+                MIN(standingsdate) AS playoff_init,
+                MIN(g) AS g
+                FROM base_ranking
+                where season_id = 22011 AND g=66               
+                group by all
+                 order by 1
+    ),
 
-        joined AS (
+    playoff_covid AS (
+     SELECT  
+                season,
+                MIN(standingsdate) AS playoff_init,
+                MIN(g) AS g
+                FROM base_ranking
+                where (season_id = 22020 AND g=72) OR (season_id = 22019 AND g=75)               
+                group by all
+                 order by 1
+                ),
+    union_all AS (
+        SELECT * FROM playoff_82
+        UNION ALL
+        SELECT * FROM playoff_lockout
+        UNION ALL 
+        SELECT * FROM playoff_covid
+    
+    )
 
-            SELECT 
-                a.season,
-                a.g,
-                MIN(standingsdate) AS playoff_init
-            FROM base_ranking a
-            JOIN num_part_liga_reg b
-            ON a.season = b.season AND a.g = b.g
-            WHERE standingsdate > '2004-01-01' 
-            group by 1,2 
-        )
-    SELECT * FROM joined 
+    SELECT * FROM union_all 
