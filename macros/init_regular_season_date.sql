@@ -1,30 +1,25 @@
-WITH base_ranking AS (
-        
-        SELECT * FROM {{ref('base_nba_games_data__ranking')}}
-),
+{% macro init_regular_season_date() %}
 
-    src_games_details AS (
-        SELECT * FROM {{source('__nba_games_data','game_details')}}
-    ),
-
-    src_games AS (
-
+WITH src_games AS (
         SELECT * FROM {{source('__nba_games_data','games')}}
     ),
 
-reg_season_init AS (
-        SELECT  
-                season,
-                MIN(standingsdate) AS reg_season_init,
-                MAX(g) AS g
-                FROM base_ranking
-                where standingsdate > '2004-01-01' AND  season_id LIKE '2%' AND g=1               
-                group by all
-                 order by 1
-),
-liga_sin_pretemp AS (
-    SELECT *
-    FROM src_games_details a
-    JOIN src_games b 
-    ON a.
-)
+        start_reg_season AS (
+                SELECT 
+                        season,
+                        MIN(game_date_est) AS reg_season_init     
+                        FROM src_games where game_id like '2%' 
+                        group by season
+                        order by season
+            ),
+
+        season_casted AS (
+            SELECT 
+                {{concat_season('season')}},
+                reg_season_init
+                FROM start_reg_season
+        )
+
+SELECT * FROM season_casted
+
+{% endmacro %}
