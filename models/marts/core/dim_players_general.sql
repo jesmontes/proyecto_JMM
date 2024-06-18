@@ -12,9 +12,16 @@ WITH players_complete AS (
             college,
             draft_year,
             draft_round,
-            draft_number
-
+            draft_number,
+            ROW_NUMBER() OVER (PARTITION BY players_general_id order by draft_year) AS row_num
+            
         FROM players_complete
+    ),
+
+    players_distinct AS(
+            SELECT * FROM players_general where row_num = 1
+
     )
 
-SELECT * FROM players_general
+    select * FROM players_distinct
+    
