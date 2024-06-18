@@ -16,7 +16,7 @@ key_game_details AS (
         fg_pct,
         fgm,
         fta,
-        min,
+        {{convert_minute_errors('min')}} as min,
         ft_pct,
         plus_minus,
         stl,
