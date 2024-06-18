@@ -64,10 +64,18 @@ models:
         description: "Timestamp indicating when the data was last synchronized by Fivetran."
         tests:
           - not_null
+      - name: division_id
+        description: "Identifier for the division to which the team belongs."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_division')
+              field: division_id
       - name: season_id
         description: "Identifier of the season."
         tests:
           - not_null
-          - relationships:
-              to: ref('dim_season')
-              field: season_id
+          # - relationships:
+          #     to: ref('dim_season')
+          #     field: season_id
+          

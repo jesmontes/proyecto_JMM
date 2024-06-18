@@ -31,4 +31,4 @@ WITH stg_ranking AS (
 
     )
 
-SELECT * FROM fct_ranking
+SELECT * FROM fct_ranking 

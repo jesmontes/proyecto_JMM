@@ -1,6 +1,23 @@
-WITH playoff_init AS (
-    SELECT * FROM {{ref('stg_nba_games_data__playoff_init')}}
+WITH reg_season_init AS (
+
+    {{init_regular_season_date()}}
+), 
+
+playoff_init AS (
+    {{init_playoff_date()}}
 ) ,
+
+init_date AS (
+    select 
+        a.season,
+        a.reg_season_init,
+        b.playoff_init
+     from reg_season_init a
+    JOIN playoff_init b
+    ON a.season = b.season
+),
+
+
 games AS (
     SELECT * FROM {{ref('base_nba_games_data__games')}}
 ),
@@ -28,18 +45,18 @@ playoff AS (
         ,a.season
         ,a.season_id
         ,a.game_status
-        ,CASE   WHEN a.season = b.season AND a.game_date_est >= b.playoff_init THEN 'Playoff'
-                --WHEN a.season = b.season AND a.game_date_est >= b.playoff_init THEN 'Playoff'
-                WHEN a.season = b.season AND a.game_date_est < b.playoff_init THEN 'Regular Season'
-
-            ELSE 'Regular Season'
+        ,CASE   
+            WHEN a.season = b.season AND a.game_date_est >= b.playoff_init THEN 'Playoff'
+            WHEN a.season = b.season AND a.game_date_est BETWEEN b.reg_season_init AND b.playoff_init THEN 'Regular Season'
+            ELSE 'Preseason'
             END AS game_type
         ,_fivetran_deleted
         ,_fivetran_synced
         FROM games a    
-        LEFT JOIN playoff_init b 
+        LEFT JOIN init_date b 
         ON a.season = b.season
-),
+) 
+,
 
 id_game_type AS (
 
@@ -71,4 +88,4 @@ id_game_type AS (
                 ,_fivetran_synced
                 FROM playoff
 )
-SELECT * FROM id_game_type
+SELECT * FROM id_game_type  

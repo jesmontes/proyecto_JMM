@@ -1,25 +1,20 @@
 {% macro init_regular_season_date() %}
 
-WITH src_games AS (
-        SELECT * FROM {{source('__nba_games_data','games')}}
+WITH base_games AS (
+
+        SELECT * FROM {{ref('base_nba_games_data__games')}}
     ),
 
-        start_reg_season AS (
-                SELECT 
-                        season,
-                        MIN(game_date_est) AS reg_season_init     
-                        FROM src_games where game_id like '2%' 
-                        group by season
-                        order by season
-            ),
-
-        season_casted AS (
+    start_reg_season AS (
             SELECT 
-                {{concat_season('season')}},
-                reg_season_init
-                FROM start_reg_season
+                season,
+                MIN(game_date_est) AS reg_season_init 
+
+                FROM base_games where game_id like '2%' 
+                group by season
+                order by season
         )
 
-SELECT * FROM season_casted
+SELECT * FROM start_reg_season
 
 {% endmacro %}
