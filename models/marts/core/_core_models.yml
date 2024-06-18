@@ -219,10 +219,7 @@ models:
         description: "Unique identifier for the player_general."
         tests:
           - not_null
-      - name: player_id
-        description: "Unique identifier for the player."
-        tests:
-          - not_null
+
       - name: player_name
         description: "Name of the player."
         tests:

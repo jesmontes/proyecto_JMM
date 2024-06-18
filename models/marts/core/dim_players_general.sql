@@ -6,7 +6,7 @@ WITH players_complete AS (
     players_general AS (
         SELECT 
             {{dbt_utils.generate_surrogate_key(['player_id','player_name'])}} AS players_general_id,
-            player_id,
+            --player_id,
             player_name,
             country,
             college,

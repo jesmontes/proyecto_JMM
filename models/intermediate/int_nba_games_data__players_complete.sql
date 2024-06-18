@@ -16,17 +16,17 @@ joined AS (
         ,a.season
         ,a.season_id
         ,a.team_id
-        ,b.age
-        ,b.player_height_cm
-        ,b.player_weight_kg
-        ,b.country
-        ,b.college
-        ,b.draft_year
-        ,b.draft_round
-        ,b.draft_number
+        ,COALESCE (b.age,0) AS age
+        ,COALESCE(b.player_height_cm,0) AS player_height_cm
+        ,COALESCE(b.player_weight_kg,0) AS player_weight_kg
+        ,COALESCE(b.country,'Unknown') AS country
+        ,COALESCE(b.college,'Unknown') AS college
+        ,COALESCE(b.draft_year,'Unknown') AS draft_year
+        ,COALESCE(b.draft_round,'Unknown') AS draft_round
+        ,COALESCE(b.draft_number,'Unknown') AS draft_number
         ,a._fivetran_synced  
     FROM stg_players_games a
-    JOIN base_players_all_seasons b
+    LEFT JOIN base_players_all_seasons b
     ON a.player_name = b.player_name AND a.season=b.season
 
 )
