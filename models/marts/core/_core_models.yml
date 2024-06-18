@@ -215,12 +215,17 @@ models:
   - name: dim_players_general
     description: "Table containing detailed information about NBA players."
     columns:
-      - name: player_general_id
-        description: "Unique identifier for the player_general."
+
+      - name: player_id
+        description: "Unique identifier for the player."
         tests:
           - not_null
       - name: player_name
         description: "Name of the player."
+        tests:
+          - not_null
+      - name: player_general_id
+        description: "Unique identifier for the player_general."
         tests:
           - not_null
       - name: season

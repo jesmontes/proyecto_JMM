@@ -9,6 +9,13 @@ models:
         tests:
           - not_null
           - unique
+      - name: season_id
+        description: "Identifier of the season."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_season')
+              field: season_id
       - name: game_id
         description: "Unique identifier for the game."
         tests:

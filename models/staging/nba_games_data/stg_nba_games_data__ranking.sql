@@ -15,7 +15,7 @@ WITH base_ranking AS (
                 g,
                 w,
                 l,
-                w_pct,
+                {{round_and_alias('w_pct',1)}},
                 road_record,            
                 home_record,
                 _fivetran_synced

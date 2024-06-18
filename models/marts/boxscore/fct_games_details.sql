@@ -7,7 +7,8 @@ WITH int_games__games_details AS (
 
         SELECT 
             
-            game_details_id, 
+            game_details_id,
+            season_id, 
             game_id,
             game_type_id,
             game_date_est,

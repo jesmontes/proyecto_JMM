@@ -9,7 +9,7 @@ WITH base_games AS (
     players_2003_2022 AS (
    
         SELECT       
-            {{dbt_utils.generate_surrogate_key(['a.player_id','a.player_name','a.team_id'])}} as surr_player_id
+            {{dbt_utils.generate_surrogate_key(['a.player_id','a.player_name','a.team_id','b.season_id'])}} as surr_player_id
             --,a.player_id || a.player_name || a.team_id as surr_player_id2
             ,a.player_name  
             ,a.team_id                                                          
