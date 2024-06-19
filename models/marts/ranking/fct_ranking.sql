@@ -1,3 +1,10 @@
+{{ config(
+    materialized='incremental',
+    unique_key = 'game_id'
+    ) 
+    }}
+
+
 WITH stg_ranking AS (
         
         SELECT * FROM {{ref('stg_nba_games_data__ranking')}}
@@ -32,3 +39,9 @@ WITH stg_ranking AS (
     )
 
 SELECT * FROM fct_ranking 
+
+{% if is_incremental() %}
+
+	  WHERE _fivetran_synced > (SELECT MAX(_fivetran_synced) FROM {{ this }} )
+
+{% endif %}

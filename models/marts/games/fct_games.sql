@@ -1,5 +1,16 @@
+{{ config(
+    materialized='incremental',
+    unique_key = 'game_id'
+    ) 
+    }}
+
 WITH stg_games AS (
     SELECT * FROM {{ref('stg_nba_games_data__games')}}
+{% if is_incremental() %}
+
+	  WHERE _fivetran_synced > (SELECT MAX(_fivetran_synced) FROM {{ this }} )
+
+{% endif %}
 ),
 
     fct_games AS (
