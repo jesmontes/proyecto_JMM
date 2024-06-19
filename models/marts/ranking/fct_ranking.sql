@@ -1,6 +1,6 @@
 {{ config(
     materialized='incremental',
-    unique_key = 'game_id'
+    unique_key = 'ranking_id'
     ) 
     }}
 
@@ -30,7 +30,8 @@ WITH stg_ranking AS (
                 a.w_pct,
                 a.road_record,            
                 a.home_record,
-                a._fivetran_synced
+                GREATEST(a._fivetran_synced,b._fivetran_synced) AS _fivetran_synced
+
 
             FROM stg_ranking a 
             JOIN stg_teams b 
