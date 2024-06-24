@@ -1,0 +1,379 @@
+version: 2
+
+sources:
+  - name: __nba_games_data
+    description: "Data about the NBA since 2003, including players, games, and more."
+    database: alumno27_dev_bronze_db
+    schema: __nba_games_data
+    tables:
+      - name: games
+        description: "Table containing information about the games."
+        columns:
+          - name: _FIVETRAN_ID
+            data_type: varchar
+            description: "Unique identifier provided by Fivetran for each record."
+          - name: game_date_est
+            data_type: date
+            description: "Date of the game in Eastern Standard Time."
+            tests:
+              - not_null
+          - name: game_id
+            data_type: number
+            description: "Unique identifier for the game."
+            tests:
+              - not_null
+              
+          - name: game_status_text
+            data_type: varchar
+            description: "Status of the game."
+          - name: home_team_id
+            data_type: number
+            description: "Identifier of the home team."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('__nba_games_data', 'teams')
+                  field: team_id
+          - name: visitor_team_id
+            data_type: number
+            description: "Identifier of the visiting team."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('__nba_games_data', 'teams')
+                  field: team_id
+          - name: season
+            data_type: number
+            description: "Season in which the game is played."
+          - name: team_id_home
+            data_type: number
+            description: "Identifier of the home team (duplicate)."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('__nba_games_data', 'teams')
+                  field: team_id
+          - name: pts_home
+            data_type: number
+            description: "Points scored by the home team."
+            
+          - name: fg_pct_home
+            data_type: number
+            description: "Field goal percentage of the home team."
+            
+          - name: ft_pct_home
+            data_type: number
+            description: "Free throw percentage of the home team."
+            
+          - name: fg3_pct_home
+            data_type: number
+            description: "Three-point field goal percentage of the home team."
+            
+          - name: ast_home
+            data_type: number
+            description: "Number of assists by the home team."
+            
+          - name: reb_home
+            data_type: number
+            description: "Number of rebounds by the home team."
+           
+          - name: team_id_away
+            data_type: number
+            description: "Identifier of the visiting team."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('__nba_games_data', 'teams')
+                  field: team_id                 
+                  # type: many_to_one          
+          - name: pts_away
+            data_type: number
+            description: "Points scored by the visiting team."
+            
+          - name: fg_pct_away
+            data_type: number
+            description: "Field goal percentage of the visiting team."
+            
+          - name: ft_pct_away
+            data_type: number
+            description: "Free throw percentage of the visiting team."
+            
+          - name: fg3_pct_away
+            data_type: number
+            description: "Three-point field goal percentage of the visiting team."
+            
+          - name: ast_away
+            data_type: number
+            description: "Number of assists by the visiting team."
+            
+          - name: reb_away
+            data_type: number
+            description: "Number of rebounds by the visiting team."
+            
+          - name: home_team_wins
+            data_type: number
+            description: "Indicates if the home team won the game."
+            tests:
+              - not_null
+          - name: _FIVETRAN_DELETED
+            data_type: boolean
+            description: "Flag indicating whether the record has been deleted in the source system."
+          - name: _FIVETRAN_SYNCED
+            data_type: timestamp_tz
+            description: "Timestamp indicating when the record was synced from the source system to the destination."
+        
+
+      - name: game_details
+        description: "Table containing details of each game."
+        columns:
+          - name: _FIVETRAN_ID
+            data_type: varchar
+            description: "Unique identifier provided by Fivetran for each record."
+          - name: game_id
+            data_type: number
+            description: "Unique identifier for the game."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('__nba_games_data', 'games')
+                  field: game_id  
+          - name: team_id
+            data_type: number
+            description: "Identifier of the team."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('__nba_games_data', 'teams')
+                  field: team_id  
+          - name: team_abbreviation
+            data_type: varchar
+            description: "Abbreviation of the team."
+          - name: team_city
+            data_type: varchar
+            description: "City of the team."
+          - name: player_id
+            data_type: number
+            description: "Unique identifier for the player."
+          - name: player_name
+            data_type: varchar
+            description: "Name of the player."
+          - name: nickname
+            data_type: varchar
+            description: "Nickname of the player."
+          - name: start_position
+            data_type: varchar
+            description: "Starting position of the player."
+          - name: comment
+            data_type: varchar
+            description: "Comment on the player's performance."
+          - name: min
+            data_type: varchar
+            description: "Minutes played by the player."
+          - name: fgm
+            data_type: number
+            description: "Field goals made by the player."
+          - name: fga
+            data_type: number
+            description: "Field goals attempted by the player."
+          - name: fg_pct
+            data_type: number
+            description: "Field goal percentage of the player."
+          - name: fg3m
+            data_type: number
+            description: "Three-point field goals made by the player."
+          - name: fg3a
+            data_type: number
+            description: "Three-point field goals attempted by the player."
+          - name: fg3_pct
+            data_type: number
+            description: "Three-point field goal percentage of the player."
+          - name: ftm
+            data_type: number
+            description: "Free throws made by the player."
+          - name: fta
+            data_type: number
+            description: "Free throws attempted by the player."
+          - name: ft_pct
+            data_type: number
+            description: "Free throw percentage of the player."
+          - name: oreb
+            data_type: number
+            description: "Offensive rebounds by the player."
+          - name: dreb
+            data_type: number
+            description: "Defensive rebounds by the player."
+          - name: reb
+            data_type: number
+            description: "Total rebounds by the player."
+          - name: ast
+            data_type: number
+            description: "Assists by the player."
+          - name: stl
+            data_type: number
+            description: "Steals by the player."
+          - name: blk
+            data_type: number
+            description: "Blocks by the player."
+          - name: tos
+            data_type: number
+            description: "Turnovers by the player."
+          - name: pf
+            data_type: number
+            description: "Personal fouls by the player."
+          - name: pts
+            data_type: number
+            description: "Points scored by the player."
+          - name: plus_minus
+            data_type: number
+            description: "Plus/minus statistic of the player."
+          - name: _FIVETRAN_DELETED
+            data_type: boolean
+            description: "Flag indicating whether the record has been deleted in the source system."
+          - name: _FIVETRAN_SYNCED
+            data_type: timestamp_tz
+            description: "Timestamp indicating when the record was synced from the source system to the destination."
+        
+
+      - name: players
+        description: "Table containing information about the players."
+        columns:
+          - name: _FIVETRAN_ID
+            data_type: varchar
+            description: "Unique identifier provided by Fivetran for each record."
+          - name: player_name
+            data_type: varchar
+            description: "Name of the player."
+          - name: team_id
+            data_type: number
+            description: "Identifier of the player's team."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('__nba_games_data', 'teams')
+                  field: team_id  
+          - name: player_id
+            data_type: number
+            description: "Unique identifier for the player."
+            tests:
+              - not_null
+          - name: season
+            data_type: number
+            description: "Season in which the player is playing."
+          - name: _FIVETRAN_DELETED
+            data_type: boolean
+            description: "Flag indicating whether the record has been deleted in the source system."
+          - name: _FIVETRAN_SYNCED
+            data_type: timestamp_tz
+            description: "Timestamp indicating when the record was synced from the source system to the destination."
+      - name: ranking
+        description: "Table containing information about team rankings."
+        columns:
+          - name: _FIVETRAN_ID
+            data_type: varchar
+            description: "Unique identifier provided by Fivetran for each record."
+          - name: team_id
+            data_type: number
+            description: "Identifier of the team."
+            tests:
+              - not_null
+              - relationships:
+                  to: source('__nba_games_data', 'teams')
+                  field: team_id  
+          - name: league_id
+            data_type: number
+            description: "Identifier of the league."
+          - name: season_id
+            data_type: number
+            description: "Identifier of the season."
+          - name: standingsdate
+            data_type: date
+            description: "Date of the ranking."
+          - name: conference
+            data_type: varchar
+            description: "Conference to which the team belongs."
+          - name: team
+            data_type: varchar
+            description: "Name of the team."
+          - name: g
+            data_type: number
+            description: "Number of games played."
+          - name: w
+            data_type: number
+            description: "Number of games won."
+          - name: l
+            data_type: number
+            description: "Number of games lost."
+          - name: w_pct
+            data_type: number
+            description: "Winning percentage."
+          - name: home_record
+            data_type: varchar
+            description: "Home game record."
+          - name: road_record
+            data_type: varchar
+            description: "Road game record."
+          - name: returntoplay
+            data_type: varchar
+            description: "Information about return to play."
+          - name: _FIVETRAN_DELETED
+            data_type: boolean
+            description: "Flag indicating whether the record has been deleted in the source system."
+          - name: _FIVETRAN_SYNCED
+            data_type: timestamp_tz
+            description: "Timestamp indicating when the record was synced from the source system to the destination."
+
+      - name: teams
+        description: "Table containing information about the teams."
+        columns:
+          - name: _FIVETRAN_ID
+            data_type: varchar
+            description: "Unique identifier provided by Fivetran for each record."
+          - name: league_id
+            data_type: number
+            description: "Identifier of the league."
+          - name: team_id
+            data_type: number
+            description: "Identifier of the team."
+            tests:
+              - not_null
+              - unique
+          - name: min_year
+            data_type: number
+            description: "Minimum year of participation."
+          - name: max_year
+            data_type: number
+            description: "Maximum year of participation."
+          - name: abbreviation
+            data_type: varchar
+            description: "Abbreviation of the team."
+          - name: nickname
+            data_type: varchar
+            description: "Nickname of the team."
+          - name: yearfounded
+            data_type: number
+            description: "Year the team was founded."
+          - name: city
+            data_type: varchar
+            description: "City of the team."
+          - name: arena
+            data_type: varchar
+            description: "Name of the team's arena."
+          - name: arenacapacity
+            data_type: number
+            description: "Capacity of the arena."
+          - name: owner
+            data_type: varchar
+            description: "Owner of the team."
+          - name: generalmanager
+            data_type: varchar
+            description: "General manager of the team."
+          - name: headcoach
+            data_type: varchar
+            description: "Head coach of the team."
+          - name: _FIVETRAN_DELETED
+            data_type: boolean
+            description: "Flag indicating whether the record has been deleted in the source system."
+          - name: _FIVETRAN_SYNCED
+            data_type: timestamp_tz
+            description: "Timestamp indicating when the record was synced from the source system to the destination."
+

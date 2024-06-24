@@ -1,0 +1,321 @@
+version: 2
+
+models:
+
+  - name: int_nba_games_data__players_games_complete
+    description: "Model containing extended info of players (joining players_games_details with players_all_seasons)."
+    columns:
+        - name: player_id
+          data_type: number
+          description: "Identifier for the player."
+          tests:
+            - not_null
+
+        - name: player_name
+          data_type: varchar
+          description: "Name of the player."
+          tests:
+            - not_null
+
+        - name: season
+          data_type: number
+          description: "Season in which the game is played."
+          tests:
+            - not_null
+
+        - name: season_id
+          data_type: number
+          description: "Unique identifier for the Season."
+          tests:
+            - not_null
+
+        - name: team_id
+          data_type: number
+          description: "Identifier of the team."
+          tests:
+            - not_null
+            - relationships:
+                to: ref('stg_nba_games_data__teams')
+                field: team_id
+
+        - name: age
+          data_type: number
+          description: "Age of the player."
+          tests:
+            - not_null
+
+        - name: player_height_cm
+          data_type: number
+          description: "Height of the player (in centimeters)."
+          tests:
+            - not_null
+
+        - name: player_weight_kg
+          data_type: number
+          description: "Weight of the player (in kilograms)."
+          tests:
+            - not_null
+
+        - name: college
+          data_type: varchar
+          description: "Name of the college the player attended."
+          tests:
+            - not_null
+
+        - name: country
+          data_type: varchar
+          description: "Name of the country the player was born in (not necessarily the nationality)."
+          tests:
+            - not_null
+
+        - name: draft_year
+          data_type: varchar
+          description: "The year the player was drafted."
+          tests:
+            - not_null
+
+        - name: draft_round
+          data_type: varchar
+          description: "The draft round the player was picked."
+          tests:
+            - not_null
+
+        - name: draft_number
+          data_type: varchar
+          description: "The number at which the player was picked in his draft round."
+          tests:
+            - not_null
+
+        - name: _FIVETRAN_SYNCED
+          data_type: timestamp_tz
+          description: "Timestamp indicating when the record was synced from the source system to the destination."
+          tests:
+            - not_null
+
+  - name: int_games_game_details_grouped
+    description: "Model containing information about the games gropued game details."
+    columns:
+      - name: game_date_est
+        data_type: date
+        description: "Date of the game in Eastern Standard Time."
+        tests:
+          - not_null
+
+      - name: game_id
+        data_type: number
+        description: "Unique identifier for the game."
+        tests:
+          - not_null
+
+      - name: game_status
+        data_type: varchar
+        description: "Status of the game."
+        tests:
+          - not_null
+
+      - name: team_id_home
+        data_type: number
+        description: "Identifier of the home team."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_nba_games_data__teams')
+              field: team_id
+
+      - name: pts_home
+        data_type: number
+        description: "Points scored by the home team."
+        
+      - name: fg_pct_home
+        data_type: number
+        description: "Field goal percentage of the home team."
+        
+      - name: ft_pct_home
+        data_type: number
+        description: "Free throw percentage of the home team."
+       
+      - name: fg3_pct_home
+        data_type: number
+        description: "Three-point field goal percentage of the home team."
+
+      - name: ast_home
+        data_type: number
+        description: "Number of assists by the home team."
+
+      - name: reb_home
+        data_type: number
+        description: "Number of rebounds by the home team."
+
+      - name: team_id_away
+        data_type: number
+        description: "Identifier of the visiting team."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_nba_games_data__teams')
+              field: team_id
+
+      - name: pts_away
+        data_type: number
+        description: "Points scored by the visiting team."
+
+      - name: fg_pct_away
+        data_type: number
+        description: "Field goal percentage of the visiting team."
+
+      - name: ft_pct_away
+        data_type: number
+        description: "Free throw percentage of the visiting team."
+
+      - name: fg3_pct_away
+        data_type: number
+        description: "Three-point field goal percentage of the visiting team."
+
+      - name: ast_away
+        data_type: number
+        description: "Number of assists by the visiting team."
+
+      - name: reb_away
+        data_type: number
+        description: "Number of rebounds by the visiting team."
+
+      - name: home_team_wins_id
+        data_type: varchar
+        description: "Unique identifier for the home_teams_wins."
+        tests:
+          - not_null
+
+
+      - name: season_id
+        data_type: number
+        description: "Unique identifier for the Season."
+        tests:
+          - not_null
+
+      - name: team_id
+        data_type: number
+        description: "Identifier of the team."
+        tests:
+        - not_null
+        - relationships:
+            to: ref('stg_nba_games_data__teams')
+            field: team_id
+
+      - name: team_abbreviation
+        data_type: varchar
+        description: "Abbreviation of the team."
+        tests:
+        - not_null
+
+      - name: team_city
+        data_type: varchar
+        description: "City of the team."
+        tests:
+        - not_null
+
+      - name: player_id
+        data_type: number
+        description: "Identifier for the player."
+        tests:
+        - not_null
+
+      - name: player_name
+        data_type: varchar
+        description: "Name of the player."
+        tests:
+        - not_null  
+
+      - name: start_position
+        data_type: varchar
+        description: "Starting position of the player."
+      
+      - name: comment
+        data_type: varchar
+        description: "Comment on the player's performance."
+      
+      - name: min
+        data_type: varchar
+        description: "Minutes played by the player."
+      
+      - name: fgm
+        data_type: number
+        description: "Field goals made by the player."
+      
+      - name: fga
+        data_type: number
+        description: "Field goals attempted by the player."
+      
+      - name: fg_pct
+        data_type: number
+        description: "Field goal percentage of the player."
+      
+      - name: fg3m
+        data_type: number
+        description: "Three-point field goals made by the player."
+      
+      - name: fg3a
+        data_type: number
+        description: "Three-point field goals attempted by the player."
+      
+      - name: fg3_pct
+        data_type: number
+        description: "Three-point field goal percentage of the player."
+      
+      - name: ftm
+        data_type: number
+        description: "Free throws made by the player."
+      
+      - name: fta
+        data_type: number
+        description: "Free throws attempted by the player."
+      
+      - name: ft_pct
+        data_type: number
+        description: "Free throw percentage of the player."
+      
+      - name: oreb
+        data_type: number
+        description: "Offensive rebounds by the player."
+      
+      - name: dreb
+        data_type: number
+        description: "Defensive rebounds by the player."
+      
+      - name: reb
+        data_type: number
+        description: "Total rebounds by the player."
+      
+      - name: ast
+        data_type: number
+        description: "Assists by the player."
+      
+      - name: stl
+        data_type: number
+        description: "Steals by the player."
+      
+      - name: blk
+        data_type: number
+        description: "Blocks by the player."
+      
+      - name: tos
+        data_type: number
+        description: "Turnovers by the player."
+      
+      - name: pf
+        data_type: number
+        description: "Personal fouls by the player."
+      
+      - name: pts
+        data_type: number
+        description: "Points scored by the player."
+      
+      - name: plus_minus
+        data_type: number
+        description: "Plus/minus statistic of the player."
+      
+
+      - name: _FIVETRAN_SYNCED
+        data_type: timestamp_tz
+        description: "Timestamp indicating when the record was synced from the source system to the destination."
+        tests:
+          - not_null

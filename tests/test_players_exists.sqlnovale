@@ -1,0 +1,39 @@
+-- a games details tengo que añadirle la season para comparar
+WITH games_details_with_season AS (
+        SELECT  
+            a.player_id,
+            MIN(b.season) AS min_season_games,
+            MAX(b.season) AS max_season_games   
+            FROM {{ source('__nba_games_data', 'game_details') }} a
+            JOIN {{ source('__nba_games_data', 'games') }} b
+            ON a.game_id = b.game_id 
+            GROUP BY 1
+), 
+  
+    players AS (
+        SELECT 
+                player_id,
+                MIN(season) as min_season,
+                MAX(season) as max_season
+        FROM {{ source('__nba_games_data', 'players') }}
+        GROUP BY 1
+
+    ),
+ 
+    joined AS (
+      SELECT    
+           *
+        FROM players a 
+        JOIN games_details_with_season b
+        ON a.player_id = b.player_id 
+    )
+    
+    SELECT * 
+    FROM joined 
+    where min_season != min_season_games OR max_season != max_season_games
+    --where min_season = min_season_games AND max_season = max_season_games
+
+
+
+
+
